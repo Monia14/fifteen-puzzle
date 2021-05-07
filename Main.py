@@ -38,13 +38,13 @@ def main():
     puzzle = convert_board(file_handler.board)
     board = Matrix(puzzle, int(file_handler.size[0]), int(file_handler.size[1]), 0, "", "")
 
-    print(" wczytana tablica: ", board.board)
-    print(" końcowa tablica: ", board.result)
+    # print(" wczytana tablica: ", board.board)
+    # print(" końcowa tablica: ", board.result)
 
     if algorithm == "bfs":
         bfs = BFS(board.board, board.result, get_order(param), board.row, board.column)
         bfs.bfs()
-        sequence, len_sequence, depth, visited, processed, time = bfs.sequence, len(bfs.sequence), bfs.depth, \
+        sequence, len_sequence, depth, visited, processed, process_time = bfs.sequence, len(bfs.sequence), bfs.depth, \
                                                                   bfs.visited, bfs.processed, bfs.time
 
     if algorithm == "dfs":
@@ -58,16 +58,18 @@ def main():
         sequence, len_sequence, depth, visited, processed, process_time = astar.sequence, len(
             astar.sequence), astar.depth, \
                                                                           astar.visited, astar.processed, astar.time
-
-    print("rozwiązanie:", sequence)
-    if sequence == '-1':
+    if not sequence:
+        sequence = '-1'
         len_sequence = -1
     process_time = round(process_time * 1000, 3)
+
+    print("rozwiązanie:", sequence)
     print("długość znalezionego rozwiązania: ", len_sequence)
     print("maksymalna głębokość rekursji: ", depth)
     print("liczba stanów odwiedzonych: ", visited)
     print("liczba stanów przetworzonych: ", processed)
     print("czas trwania: ", process_time, "ms")
+
     file_handler.writeOutput(sequence, len_sequence)
     file_handler.writeStats(len_sequence, visited, processed, depth, process_time)
 
