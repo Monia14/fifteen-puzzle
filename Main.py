@@ -38,8 +38,7 @@ def main():
     puzzle = convert_board(file_handler.board)
     board = Matrix(puzzle, int(file_handler.size[0]), int(file_handler.size[1]), 0, "", "")
 
-    # print(" wczytana tablica: ", board.board)
-    # print(" końcowa tablica: ", board.result)
+
 
     if algorithm == "bfs":
         bfs = BFS(board.board, board.result, get_order(param), board.row, board.column)
@@ -63,11 +62,11 @@ def main():
         len_sequence = -1
     process_time = round(process_time * 1000, 3)
 
-    print("rozwiązanie:", sequence)
-    print("długość znalezionego rozwiązania: ", len_sequence)
-    print("maksymalna głębokość rekursji: ", depth)
-    print("liczba stanów odwiedzonych: ", visited)
-    print("liczba stanów przetworzonych: ", processed)
+    print("rozwiazanie:", sequence)
+    print("dlugosc znalezionego rozwiazania: ", len_sequence)
+    print("maksymalna glebokosc rekursji: ", depth)
+    print("liczba stanow odwiedzonych: ", visited)
+    print("liczba stanow przetworzonych: ", processed)
     print("czas trwania: ", process_time, "ms")
 
     file_handler.writeOutput(sequence, len_sequence)
